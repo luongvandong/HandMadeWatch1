@@ -1,0 +1,117 @@
+package com.donglv.watch.entity;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Created by vcom on 26/12/2016.
+ */
+public class User {
+    @SerializedName("id")
+    private String id;
+    @SerializedName("name")
+    private String name;
+    @SerializedName("email")
+    private String email;
+    @SerializedName("created_at")
+    private String created_at;
+    @SerializedName("updated_at")
+    private String updated_at;
+    @SerializedName("avatar_id")
+    private String avatar_id;
+    @SerializedName("enable")
+    private String enable;
+    @SerializedName("first_name")
+    private String first_name;
+    @SerializedName("last_name")
+    private String last_name;
+    @SerializedName("telephone")
+    private String telephone;
+    @SerializedName("fax")
+    private String fax;
+    @SerializedName("company")
+    private String company;
+    @SerializedName("address1")
+    private String address1;
+    @SerializedName("address2")
+    private String address2;
+    @SerializedName("city")
+    private String city;
+    @SerializedName("post_code")
+    private String post_code;
+    @SerializedName("country")
+    private String country;
+    @SerializedName("region_state")
+    private String region_state;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public String getAvatar_id() {
+        return avatar_id;
+    }
+
+    public String getEnable() {
+        return enable;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getAddress1() {
+        return address1;
+    }
+
+    public String getAddress2() {
+        return address2;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getPost_code() {
+        return post_code;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getRegion_state() {
+        return region_state;
+    }
+}

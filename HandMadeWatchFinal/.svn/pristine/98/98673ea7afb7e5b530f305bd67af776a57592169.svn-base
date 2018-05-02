@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "611607470744",
+    "firebase_url": "https://hand-made-watch.firebaseio.com",
+    "project_id": "hand-made-watch",
+    "storage_bucket": "hand-made-watch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611607470744:android:7e3bf3971444671f",
+        "android_client_info": {
+          "package_name": "com.msab.handmadewatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611607470744-t5fr92u50js84l66lhbsqgqtapreccov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt6G5Nxb-HOxZKpDX4Bmqc-EkoynJZ420"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

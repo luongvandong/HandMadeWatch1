@@ -1,0 +1,155 @@
+package com.msab.handmadewatch.fragment;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.msab.handmadewatch.common.HMW_System;
+import com.msab.handmadewatch.entity.SimpleClass;
+import com.msab.handmadewatch.service.HMWApi;
+import com.nam.customlibrary.Libs_System;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+
+/**
+ * Created by vcom on 11/11/2016.
+ */
+public class FragmentRegister extends Fragment implements View.OnClickListener {
+    private Toolbar toolbar;
+    private ImageView imgBack;
+    private EditText edtEmail;
+    private EditText edtUsername;
+    private EditText edtPassword;
+    private EditText edtConfirmPassword;
+    private TextView btnSignUp;
+    private Context context;
+    private ProgressDialog progressDialog;
+    private TextView btnCancel;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(com.msab.handmadewatch.R.layout.fragment_register, container, false);
+        init(rootView);
+        context = rootView.getContext();
+        return rootView;
+    }
+
+    private void init(View rootView){
+//        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+//        imgBack = (ImageView) toolbar.findViewById(R.id.imgBack);
+//        imgBack.setOnClickListener(this);
+        edtEmail = (EditText) rootView.findViewById(com.msab.handmadewatch.R.id.edtEmail);
+        edtUsername = (EditText) rootView.findViewById(com.msab.handmadewatch.R.id.edtUsername);
+        edtPassword = (EditText) rootView.findViewById(com.msab.handmadewatch.R.id.edtPassword);
+        edtConfirmPassword = (EditText) rootView.findViewById(com.msab.handmadewatch.R.id.edtConfirmPassword);
+        btnSignUp = (TextView)rootView.findViewById(com.msab.handmadewatch.R.id.btnSignUp);
+        btnCancel = (TextView)rootView.findViewById(com.msab.handmadewatch.R.id.btnCancel);
+        btnSignUp.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+//            case R.id.imgBack:
+//                getFragmentManager().popBackStack();
+//                break;
+            case com.msab.handmadewatch.R.id.btnSignUp:
+                Libs_System.hideKeyboard(getActivity());
+                if(!Libs_System.connectionStatus(context)){
+                    Libs_System.showToast(context, context.getString(com.msab.handmadewatch.R.string.please_check_connection));
+                    return;
+                }
+
+
+                if(edtUsername.getText().toString().trim().length()<6|| edtUsername.getText().toString().trim().length()>30){
+                    Libs_System.showToast(context, context.getString(com.msab.handmadewatch.R.string.username_must_be_from_6_to_30_character));
+                    return;
+                }
+
+//                if(edtPassword.getText().toString().trim().length()< 8 ){
+//                    Libs_System.showToast(context, getString(R.string.required_new_password_length_greater_than_8_characters));
+//                    return;
+//                }
+//
+                if(!edtEmail.getText().toString().equals("")){
+                    if(!HMW_System.isEmailValid(edtEmail.getText().toString())){
+                        Libs_System.showToast(context, context.getString(com.msab.handmadewatch.R.string.input_correctly_form_email));
+                        return;
+                    }
+                }
+                if(edtUsername.getText().toString().equals("")
+                        ||edtPassword.getText().toString().equals("")||edtConfirmPassword.getText().toString().equals("")){
+                    Libs_System.showToast(context, getString(com.msab.handmadewatch.R.string.please_input_data_vi));
+                    return;
+                }
+
+                if(!edtPassword.getText().toString().equals(edtConfirmPassword.getText().toString())){
+                    Libs_System.showToast(context, getString(com.msab.handmadewatch.R.string.new_password_must_be_equals_confirm_new_password));
+                    return;
+                }
+                showProgressDialog(context, getString(com.msab.handmadewatch.R.string.loading));
+                HMWApi api  = new HMWApi();
+                api.service().register(edtUsername.getText().toString(), edtPassword.getText().toString(), edtEmail.getText().toString(), new Callback<SimpleClass>() {
+                    @Override
+                    public void success(SimpleClass simpleClass, retrofit.client.Response response) {
+                        dismissProgressDialog();
+                        if (simpleClass.getCode().equals("200")) {
+                            Libs_System.showToast(context, context.getString(com.msab.handmadewatch.R.string.register_success));
+                            getFragmentManager().beginTransaction().add(com.msab.handmadewatch.R.id.main, new FragmentLogIn()).commit();
+                        }else {
+                            Libs_System.showToast(context, simpleClass.getDescription());
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.e("status", "fail"+error.getMessage());
+                        Log.e("error",error.getBody()+"" );
+                        dismissProgressDialog();
+                        if(error.getMessage().contains("500")){
+                            Libs_System.showToast(context, getString(com.msab.handmadewatch.R.string.username_taken));
+                        }
+                    }
+                });
+                break;
+            case com.msab.handmadewatch.R.id.btnCancel:
+                getFragmentManager().popBackStack();
+                break;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Libs_System.hideKeyboard(getActivity());
+    }
+
+    public void showProgressDialog(Context context, String message) {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setProgressStyle(0);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(message);
+        progressDialog.show();
+    }
+
+    public void dismissProgressDialog() {
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
+    }
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/headerMenu"
+    android:minHeight="?android:attr/actionBarSize">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="25dp"
+            android:layout_centerVertical="true"
+            android:layout_height="25dp"
+            android:scaleType="fitCenter"
+            android:visibility="visible" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40dp"
+            android:textAlignment="center"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/imgChat"
+            android:textColor="@color/colorBackGroundInfoMain"
+            android:text="@string/handmade_watch"
+            android:id="@+id/txtToolbarTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+        <ImageView
+            android:src="@drawable/send_button"
+            android:id="@+id/imgChat"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:visibility="visible"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/tvBadge"
+            android:layout_alignStart="@+id/tvBadge" />
+        <View
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tvBadge"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textColor="#FFF" />
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>

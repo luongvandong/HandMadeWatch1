@@ -1,0 +1,183 @@
+package com.msab.handmadewatch.entity;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
+/**
+ * Created by vcom on 29/11/2016.
+ */
+public class Favorite {
+
+    @SerializedName("code")
+    private String code;
+    @SerializedName("data")
+    private ArrayList<Data> data;
+
+    public String getCode() {
+        return code;
+    }
+
+    public ArrayList<Data> getData() {
+        return data;
+    }
+
+    public static class Media {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("mime_type")
+        private String mime_type;
+        @SerializedName("original_extension")
+        private String original_extension;
+        @SerializedName("size")
+        private String size;
+        @SerializedName("updated_by")
+        private String updated_by;
+        @SerializedName("created_by")
+        private String created_by;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getMime_type() {
+            return mime_type;
+        }
+
+        public String getOriginal_extension() {
+            return original_extension;
+        }
+
+        public String getSize() {
+            return size;
+        }
+
+        public String getUpdated_by() {
+            return updated_by;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+    }
+
+    public static class Post {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("description")
+        private String description;
+        @SerializedName("title")
+        private String title;
+        @SerializedName("price")
+        private String price;
+        @SerializedName("updated_by")
+        private String updated_by;
+        @SerializedName("created_by")
+        private String created_by;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("media")
+        private ArrayList<Media> media;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public String getUpdated_by() {
+            return updated_by;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public ArrayList<Media> getMedia() {
+            return media;
+        }
+    }
+
+    public static class Data {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("post_id")
+        private String post_id;
+        @SerializedName("post_type")
+        private String post_type;
+        @SerializedName("updated_by")
+        private String updated_by;
+        @SerializedName("created_by")
+        private String created_by;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("post")
+        private Post post;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getPost_id() {
+            return post_id;
+        }
+
+        public String getPost_type() {
+            return post_type;
+        }
+
+        public String getUpdated_by() {
+            return updated_by;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public Post getPost() {
+            return post;
+        }
+    }
+}

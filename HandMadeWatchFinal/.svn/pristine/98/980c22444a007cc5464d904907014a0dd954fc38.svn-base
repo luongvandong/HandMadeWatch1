@@ -1,0 +1,12 @@
+package com.msab.handmadewatch.service;
+import com.msab.handmadewatch.common.HMW_Constant;
+import retrofit.RestAdapter;
+
+/**
+ * Created by Administrator on 28/07/2015.
+ */
+public class BaseApi {
+    public RestAdapter restAdapter = new RestAdapter.Builder()
+            .setEndpoint(HMW_Constant.HOST)
+            .build();
+}

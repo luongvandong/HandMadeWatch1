@@ -1,0 +1,10 @@
+package com.donglv.watch.common;
+
+/**
+ * Created by Dr.Cuong on 1/20/2017.
+ */
+
+public class GlobleVars {
+    public static String TOKEN = "";
+    public static int HEIGHT;
+}

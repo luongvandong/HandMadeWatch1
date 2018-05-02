@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.msab.handmadewatch.common.RelativeSquareItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:gravity="right"
+        android:textColor="@color/white"
+        android:background="@color/black"
+        android:alpha="0.7"
+        android:textAlignment="center"
+        android:id="@+id/nameCategory"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:scaleType="centerCrop"
+        android:layout_alignBottom="@+id/imgProduct"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</com.msab.handmadewatch.common.RelativeSquareItemLayout>

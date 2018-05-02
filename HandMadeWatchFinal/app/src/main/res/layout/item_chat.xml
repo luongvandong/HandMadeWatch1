@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.donglv.watch.common.RoundedImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop">
+        </com.donglv.watch.common.RoundedImageView>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="-15dp"
+            android:src="@drawable/arrow_bg2" />
+
+
+        <TextView
+            android:maxWidth="200dp"
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner1"
+            android:padding="16dp"
+            android:text="Android charting vhdlds vd fsadfas fasf ấ fasfas fasfasfsa fsafas fas fas fas fasf sấ fas fas fas fsa fasf asdsadsa dasdsad asd asd asdas dsad asds adas dá"
+            android:textColor="#000" />
+    </LinearLayout>
+
+
+</LinearLayout>

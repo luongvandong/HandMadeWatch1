@@ -1,0 +1,194 @@
+package com.donglv.watch.fragment;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import com.donglv.watch.ActivityHome;
+import com.donglv.watch.R;
+import com.donglv.watch.adapter.MyShoppingCartAdapter;
+import com.donglv.watch.common.HMW_Constant;
+import com.donglv.watch.entity.MyCart;
+import com.donglv.watch.entity.ProductInfo;
+import com.donglv.watch.entity.SimpleClass;
+import com.donglv.watch.service.HMWApi;
+import com.nam.customlibrary.Libs_System;
+
+import java.util.ArrayList;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+/**
+ * Created by vcom on 16/11/2016.
+ */
+public class FragmentMyShoppingCart extends Fragment implements View.OnClickListener {
+    private ProgressDialog progressDialog;
+    private Context context;
+    private ListView listMyShoppingCart;
+    private MyShoppingCartAdapter myShoppingCartAdapter;
+    private Button btnSendOrder;
+    private String data;
+    private ArrayList<Order> orders = new ArrayList<>();
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(com.donglv.watch.R.layout.fragment_my_shopping_cart, container, false);
+        context = rootView.getContext();
+        init(rootView);
+        myShoppingCartAdapter = new MyShoppingCartAdapter(context, HMW_Constant.myCarts);
+        listMyShoppingCart.setAdapter(myShoppingCartAdapter);
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        TextView txtTitle =(TextView) ActivityHome.toolbar.findViewById(R.id.txtToolbarTitle);
+        txtTitle.setText(getText(R.string.my_shopping_cart));
+    }
+
+    private void init(View rootView) {
+        listMyShoppingCart = (ListView) rootView.findViewById(com.donglv.watch.R.id.listMyShoppingCart);
+        btnSendOrder = (Button) rootView.findViewById(com.donglv.watch.R.id.btnSendOrder);
+        btnSendOrder.setOnClickListener(this);
+    }
+
+
+    public void showProgressDialog(Context context, String message) {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setProgressStyle(0);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(message);
+        progressDialog.show();
+    }
+
+    public void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case com.donglv.watch.R.id.btnSendOrder:
+                orders.clear();
+                if(!HMW_Constant.myCarts.isEmpty()) {
+                    getProductInfo(HMW_Constant.myCarts, 0);
+                }
+                break;
+        }
+    }
+
+    private void getProductInfo(final ArrayList<MyCart> myCart, final int position){
+        HMWApi api = new HMWApi();
+        showProgressDialog(context, "loading");
+        api.service().getProductInfo("Bearer " + Libs_System.getStringData(context, HMW_Constant.TOKEN), "application/json", "hihi",myCart.get(position).getProduct_id(), new Callback<ProductInfo>() {
+            @Override
+            public void success(ProductInfo productInfo, Response response) {
+                dismissProgressDialog();
+                ProductInfo.Data info = productInfo.getData();
+                Libs_System.showToast(getContext(),info.getDescription());
+                Order order = new Order(info.getId(), info.getDescription(), myCart.get(position).getAdd(),  "21", "105",info.getPrice());
+                orders.add(order);
+                if(position<myCart.size()-1){
+                    getProductInfo(myCart,position+1);
+                }
+                else {
+                    sendOrder();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                dismissProgressDialog();
+            }
+        });
+    }
+
+    private void sendOrder() {
+        Log.e("Token",Libs_System.getStringData(context, HMW_Constant.TOKEN));
+        data = new Gson().toJson(orders);
+        Log.e("data", data);
+        HMWApi api = new HMWApi();
+        api.service().sendOrder("Bearer " + Libs_System.getStringData(context, HMW_Constant.TOKEN), "application/json", data, new Callback<SimpleClass>() {
+            @Override
+            public void success(SimpleClass simpleClass, Response response) {
+                Libs_System.showToast(context, "إرسال أمر النجاح");
+                getFragmentManager().beginTransaction().replace(com.donglv.watch.R.id.main, new FragmentHome()).commit();
+                HMW_Constant.myCarts.clear();
+                myShoppingCartAdapter = new MyShoppingCartAdapter(context, HMW_Constant.myCarts);
+                listMyShoppingCart.setAdapter(myShoppingCartAdapter);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("send order", error.getMessage());
+                if(error.getResponse()!=null&&error.getResponse().getStatus()==401){
+                    Libs_System.showToast(context,context.getString(com.donglv.watch.R.string.unauthorized));
+                    Libs_System.insertStringData(getContext(), HMW_Constant.TOKEN, "");
+                    ((Activity) getContext()).finish();
+                    getContext().startActivity(((Activity) getContext()).getIntent());
+                }
+            }
+        });
+    }
+
+    private class Order {
+        private String title;
+        private String price;
+        private String product_id;
+        private String description;
+        private String address;
+        private String lat;
+        private String lng;
+
+        public Order(String product_id, String description, String address, String lat, String lng,String price) {
+            this.product_id = product_id;
+            this.description = description;
+            this.address = address;
+            this.lat = lat;
+            this.lng = lng;
+            this.price = price;
+        }
+
+
+
+        public void setProduct_id(String product_id) {
+            this.product_id = product_id;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
+
+        public void setLng(String lng) {
+            this.lng = lng;
+        }
+    }
+}

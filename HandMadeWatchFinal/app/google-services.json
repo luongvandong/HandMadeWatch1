@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1049076074917",
+    "firebase_url": "https://watchfinal-79dc4.firebaseio.com",
+    "project_id": "watchfinal-79dc4",
+    "storage_bucket": "watchfinal-79dc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049076074917:android:a162b001184006f5",
+        "android_client_info": {
+          "package_name": "com.donglv.watch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049076074917-oqrqpfvod2jcqmoj9k2l5m3o0b5q2oum.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.donglv.watch",
+            "certificate_hash": "72a202b3b4dfe35c7c45bfff3c87287de8f68de3"
+          }
+        },
+        {
+          "client_id": "1049076074917-0avkg41rrohc7di7fghi1jhiud3g1ar1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8KaG1H40D11VBAY-xI-66bc5tcDEstAU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049076074917-0avkg41rrohc7di7fghi1jhiud3g1ar1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,483 @@
+package com.donglv.watch.entity;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+/**
+ * Created by Kai on 1/20/2017.
+ */
+
+public class ActionLikeResponse {
+
+    @SerializedName("code")
+    private String code;
+    @SerializedName("description")
+    private String description;
+    @SerializedName("post")
+    private Post post;
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public static class Pivot {
+        @SerializedName("post_id")
+        private String post_id;
+        @SerializedName("media_id")
+        private String media_id;
+
+        public String getPost_id() {
+            return post_id;
+        }
+
+        public String getMedia_id() {
+            return media_id;
+        }
+    }
+
+    public static class Media {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("mime_type")
+        private String mime_type;
+        @SerializedName("original_name")
+        private String original_name;
+        @SerializedName("original_extension")
+        private String original_extension;
+        @SerializedName("size")
+        private String size;
+        @SerializedName("updated_by")
+        private String updated_by;
+        @SerializedName("created_by")
+        private String created_by;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("pivot")
+        private Pivot pivot;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getMime_type() {
+            return mime_type;
+        }
+
+        public String getOriginal_name() {
+            return original_name;
+        }
+
+        public String getOriginal_extension() {
+            return original_extension;
+        }
+
+        public String getSize() {
+            return size;
+        }
+
+        public String getUpdated_by() {
+            return updated_by;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public Pivot getPivot() {
+            return pivot;
+        }
+    }
+
+    public static class Liked {
+    }
+
+    public static class Permissions {
+    }
+
+    public static class Creator {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("name")
+        private String name;
+        @SerializedName("email")
+        private String email;
+        @SerializedName("avatar_id")
+        private String avatar_id;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("enable")
+        private String enable;
+        @SerializedName("first_name")
+        private String first_name;
+        @SerializedName("last_name")
+        private String last_name;
+        @SerializedName("telephone")
+        private String telephone;
+        @SerializedName("fax")
+        private String fax;
+        @SerializedName("company")
+        private String company;
+        @SerializedName("address1")
+        private String address1;
+        @SerializedName("address2")
+        private String address2;
+        @SerializedName("city")
+        private String city;
+        @SerializedName("post_code")
+        private String post_code;
+        @SerializedName("country")
+        private String country;
+        @SerializedName("region_state")
+        private String region_state;
+        @SerializedName("facebook_id")
+        private String facebook_id;
+        @SerializedName("notification_enable")
+        private String notification_enable;
+        @SerializedName("isAdmin")
+        private boolean isAdmin;
+        @SerializedName("permissions")
+        private List<Permissions> permissions;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getAvatar_id() {
+            return avatar_id;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public String getEnable() {
+            return enable;
+        }
+
+        public String getFirst_name() {
+            return first_name;
+        }
+
+        public String getLast_name() {
+            return last_name;
+        }
+
+        public String getTelephone() {
+            return telephone;
+        }
+
+        public String getFax() {
+            return fax;
+        }
+
+        public String getCompany() {
+            return company;
+        }
+
+        public String getAddress1() {
+            return address1;
+        }
+
+        public String getAddress2() {
+            return address2;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public String getPost_code() {
+            return post_code;
+        }
+
+        public String getCountry() {
+            return country;
+        }
+
+        public String getRegion_state() {
+            return region_state;
+        }
+
+        public String getFacebook_id() {
+            return facebook_id;
+        }
+
+        public String getNotification_enable() {
+            return notification_enable;
+        }
+
+        public boolean getIsAdmin() {
+            return isAdmin;
+        }
+    }
+
+    public static class Likes {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("content")
+        private String content;
+        @SerializedName("target_id")
+        private String target_id;
+        @SerializedName("target_type")
+        private String target_type;
+        @SerializedName("updated_by")
+        private String updated_by;
+        @SerializedName("created_by")
+        private String created_by;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("creator")
+        private Creator creator;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public String getTarget_id() {
+            return target_id;
+        }
+
+        public String getTarget_type() {
+            return target_type;
+        }
+
+        public String getUpdated_by() {
+            return updated_by;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public Creator getCreator() {
+            return creator;
+        }
+    }
+
+
+
+
+    public static class Comments {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("content")
+        private String content;
+        @SerializedName("target_id")
+        private String target_id;
+        @SerializedName("target_type")
+        private String target_type;
+        @SerializedName("updated_by")
+        private String updated_by;
+        @SerializedName("created_by")
+        private String created_by;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("creator")
+        private Creator creator;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public String getTarget_id() {
+            return target_id;
+        }
+
+        public String getTarget_type() {
+            return target_type;
+        }
+
+        public String getUpdated_by() {
+            return updated_by;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public Creator getCreator() {
+            return creator;
+        }
+    }
+
+    public static class Favorited {
+    }
+
+    public static class Post {
+        @SerializedName("id")
+        private String id;
+        @SerializedName("description")
+        private String description;
+        @SerializedName("title")
+        private String title;
+        @SerializedName("price")
+        private String price;
+        @SerializedName("updated_by")
+        private String updated_by;
+        @SerializedName("created_by")
+        private String created_by;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("sale_price")
+        private String sale_price;
+        @SerializedName("currency")
+        private String currency;
+        @SerializedName("sale_active")
+        private String sale_active;
+        @SerializedName("active")
+        private String active;
+        @SerializedName("likes_count")
+        private int likes_count;
+        @SerializedName("comments_count")
+        private String comments_count;
+        @SerializedName("media")
+        private List<Media> media;
+        @SerializedName("liked")
+        private List<Liked> liked;
+        @SerializedName("likes")
+        private List<Likes> likes;
+        @SerializedName("comments")
+        private List<Comments> comments;
+        @SerializedName("favorited")
+        private List<Favorited> favorited;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public String getUpdated_by() {
+            return updated_by;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public String getSale_price() {
+            return sale_price;
+        }
+
+        public String getCurrency() {
+            return currency;
+        }
+
+        public String getSale_active() {
+            return sale_active;
+        }
+
+        public String getActive() {
+            return active;
+        }
+
+        public int getLikes_count() {
+            return likes_count;
+        }
+
+        public String getComments_count() {
+            return comments_count;
+        }
+
+        public List<Media> getMedia() {
+            return media;
+        }
+
+        public List<Liked> getLiked() {
+            return liked;
+        }
+
+        public List<Likes> getLikes() {
+            return likes;
+        }
+
+        public List<Comments> getComments() {
+            return comments;
+        }
+
+        public List<Favorited> getFavorited() {
+            return favorited;
+        }
+    }
+}

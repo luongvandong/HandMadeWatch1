@@ -1,0 +1,151 @@
+package com.donglv.watch.adapter;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.NetworkOnMainThreadException;
+import android.os.Parcelable;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.Display;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.libre.mylibs.MyUtils;
+import com.donglv.watch.ActivityHome;
+import com.donglv.watch.R;
+import com.donglv.watch.common.GlobleVars;
+import com.donglv.watch.common.HMW_Constant;
+import com.donglv.watch.fragment.FragmentProductInfo;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+
+
+/**
+ * Created by NguyenQuang on 4/5/2017.
+ */
+
+public class AdapterSliderImage extends PagerAdapter {
+    ActivityHome context;
+    List<String> listImage;
+    String idProduct;
+    int imageWidth = -1;
+    int imageHeight = -1;
+    int width = -1;
+    private int heightScreen;
+
+    public AdapterSliderImage(Context context, List<String> listImage, String idProduct) {
+        this.listImage = listImage;
+        this.context = (ActivityHome) context;
+        this.idProduct = idProduct;
+
+        this.width = Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public int getCount() {
+        return listImage.size();
+    }
+
+    public Object instantiateItem(View collection, final int position) {
+        final ImageView view = new ImageView(context);
+        final String link = HMW_Constant.HOST + "/lbmedia/" + listImage.get(position);
+        String link1 = "";
+        final LinearLayout layoutPager = HomeAdapter.getLayoutPager();
+        final android.support.v4.view.ViewPager viewPager = (ViewPager) layoutPager.findViewById(R.id.viewPaper);
+        if (listImage.size() == 1) {
+            link1 = HMW_Constant.HOST + "/lbmedia/" + listImage.get(0);
+        }
+        final String finalLink1 = link1;
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    URL url = new URL(finalLink1);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeStream(url.openConnection().getInputStream(), null, options);
+
+                    imageWidth = options.outWidth;
+                    imageHeight = options.outHeight;
+
+                    Log.d("TAG", "w: " + imageWidth);
+                    Log.d("TAG", "w: " + imageHeight);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (NetworkOnMainThreadException e) {
+                    Toast.makeText(context, "w:" + imageWidth, Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                int widthScreen = MyUtils.getScreenWidth();
+                heightScreen = (widthScreen * imageHeight) / imageWidth;
+//                Toast.makeText(context, "w:"+heightScreen, Toast.LENGTH_SHORT).show();
+                GlobleVars.HEIGHT = heightScreen;
+
+            }
+        };
+        asyncTask.execute();
+//        Toast.makeText(context, "h:" + GlobleVars.HEIGHT, Toast.LENGTH_SHORT).show();
+        if (listImage.size() == 1) {
+            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            viewPager.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, this.width));
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        } else if (listImage.size() > 1) {
+            viewPager.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, this.width));
+            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+//        Toast.makeText(context, "w:" + heightScreen, Toast.LENGTH_SHORT).show();
+        Glide.with(context).load(link).placeholder(R.drawable.ic_loadding).error(R.drawable.ic_loadding).into(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("post_id", idProduct);
+                FragmentProductInfo newFragment = new FragmentProductInfo();
+                newFragment.setArguments(bundle);
+                FragmentTransaction transaction = context.getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+        ((android.support.v4.view.ViewPager) collection).addView(view, 0);
+        return view;
+    }
+
+    @Override
+    public void destroyItem(View arg0, int arg1, Object arg2) {
+        ((android.support.v4.view.ViewPager) arg0).removeView((View) arg2);
+    }
+
+    @Override
+    public boolean isViewFromObject(View arg0, Object arg1) {
+        return arg0 == ((View) arg1);
+    }
+
+    @Override
+    public Parcelable saveState() {
+        return null;
+    }
+}

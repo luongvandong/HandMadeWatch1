@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rsz_back"
+    android:gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:text="@string/my_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:paddingBottom="30dp"
+            android:paddingRight="10dp"
+            android:paddingTop="30dp"
+            android:paddingLeft="10dp"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="1dp">
+
+                <EditText
+                    android:drawablePadding="15dp"
+                    android:drawableLeft="@drawable/use"
+                    android:singleLine="true"
+                    android:id="@+id/edtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:hint="@string/username"
+                    android:textDirection="ltr"
+                    android:textCursorDrawable="@null"
+                    android:ellipsize="start"
+                    android:padding="15dp" />
+
+                <EditText
+                    android:drawablePadding="15dp"
+                    android:drawableLeft="@drawable/key"
+                    android:singleLine="true"
+                    android:id="@+id/edtPassword"
+                    android:gravity="right"
+                    android:textCursorDrawable="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="ltr"
+                    android:inputType="textPassword"
+                    android:hint="@string/password2"
+                    android:padding="15dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="10sp"
+                    android:text="@string/dont_have_an"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="10sp"
+                    android:id="@+id/tvToRes"
+                    android:textColor="@color/black"
+                    android:text="@string/account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="10sp"
+                    android:text="@string/forgot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="10sp"
+                    android:id="@+id/tvToForgot"
+                    android:textColor="@color/black"
+                    android:text="@string/password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnLogIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button1"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:id="@+id/btnLogInfb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button2"
+                android:gravity="center"
+                android:text="@string/login_facebook"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/btnGuestLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button1"
+                android:gravity="center"
+                android:text="@string/continue_without_login"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+</LinearLayout>
